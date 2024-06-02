@@ -5,3 +5,7 @@ export class GetVersionResponseDto {
 export class ConvertHtmlToPngRequestDto {
   html: string
 }
+
+export class ConvertHtmlToPngResponseDto {
+  data: string
+}

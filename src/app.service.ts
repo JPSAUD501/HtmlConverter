@@ -1,9 +1,9 @@
-import { HttpException, Injectable, StreamableFile } from '@nestjs/common'
+import { HttpException, Injectable } from '@nestjs/common'
 import packageJson from '../package.json'
 import { apiReference } from '@scalar/nestjs-api-reference'
 import { Request, Response } from 'express'
 import { OpenAPIObject } from '@nestjs/swagger'
-import { ConvertHtmlToPngRequestDto, GetVersionResponseDto } from './app.dto'
+import { ConvertHtmlToPngRequestDto, ConvertHtmlToPngResponseDto, GetVersionResponseDto } from './app.dto'
 import { config } from './config'
 import nodeHtmlToImage from 'node-html-to-image'
 
@@ -35,7 +35,7 @@ export class AppService {
     api(req, res)
   }
 
-  async convertHtmlToPng (convertHtmlToPngRequestDto: ConvertHtmlToPngRequestDto): Promise<StreamableFile> {
+  async convertHtmlToPng (convertHtmlToPngRequestDto: ConvertHtmlToPngRequestDto): Promise<ConvertHtmlToPngResponseDto> {
     const image = await nodeHtmlToImage({
       html: convertHtmlToPngRequestDto.html,
       puppeteerArgs: {
@@ -45,6 +45,8 @@ export class AppService {
     if (!Buffer.isBuffer(image)) {
       throw new HttpException('Failed to convert HTML to PNG', 500)
     }
-    return new StreamableFile(image)
+    return {
+      data: image.toString('base64')
+    }
   }
 }

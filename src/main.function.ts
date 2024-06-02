@@ -28,5 +28,5 @@ createNestServer(server)
   .catch((err) => { Logger.error('Nest server broken!', err) })
 
 export const api = functions.runWith({
-  secrets: ['TELEGRAM_BOT_TOKEN', 'ELEVENLABS_API_KEY', 'OPENAI_API_KEY', 'SERVICE_ACCOUNT_BASE64', 'DATABASE_SSL', 'DATABASE_URL', 'GEMINI_API_KEY']
+  secrets: []
 }).https.onRequest(server)

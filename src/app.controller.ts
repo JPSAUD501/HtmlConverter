@@ -1,7 +1,7 @@
-import { Body, Controller, Get, Post, Redirect, Req, Res, StreamableFile, VERSION_NEUTRAL, Version } from '@nestjs/common'
+import { Body, Controller, Get, Post, Redirect, Req, Res, VERSION_NEUTRAL, Version } from '@nestjs/common'
 import { AppService } from './app.service'
 import { ApiExcludeEndpoint, OpenAPIObject } from '@nestjs/swagger'
-import { ConvertHtmlToPngRequestDto, GetVersionResponseDto } from './app.dto'
+import { ConvertHtmlToPngRequestDto, ConvertHtmlToPngResponseDto, GetVersionResponseDto } from './app.dto'
 import { Request, Response } from 'express'
 
 @Controller()
@@ -53,7 +53,7 @@ export class AppController {
 
   @Post('convert/to/png')
   @Version('1')
-  async convertHtmlToPng (@Body() convertHtmlToPngRequestDto: ConvertHtmlToPngRequestDto): Promise<StreamableFile> {
+  async convertHtmlToPng (@Body() convertHtmlToPngRequestDto: ConvertHtmlToPngRequestDto): Promise<ConvertHtmlToPngResponseDto> {
     return await this.appService.convertHtmlToPng(convertHtmlToPngRequestDto)
   }
 }
