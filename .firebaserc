@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "local": "melodyscout",
+    "dev": "melodyscout"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
+}
