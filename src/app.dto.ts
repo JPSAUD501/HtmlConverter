@@ -2,10 +2,10 @@ export class GetVersionResponseDto {
   version: string
 }
 
-export class ConvertHtmlToPngRequestDto {
+export class ConvertHtmlToImageRequestDto {
   html: string
 }
 
-export class ConvertHtmlToPngResponseDto {
+export class ConvertHtmlToImageResponseDto {
   data: string
 }

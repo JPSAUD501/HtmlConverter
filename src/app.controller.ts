@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Redirect, Req, Res, VERSION_NEUTRAL, Version } from '@nestjs/common'
 import { AppService } from './app.service'
 import { ApiExcludeEndpoint, OpenAPIObject } from '@nestjs/swagger'
-import { ConvertHtmlToPngRequestDto, ConvertHtmlToPngResponseDto, GetVersionResponseDto } from './app.dto'
+import { ConvertHtmlToImageRequestDto, ConvertHtmlToImageResponseDto, GetVersionResponseDto } from './app.dto'
 import { Request, Response } from 'express'
 
 @Controller()
@@ -51,9 +51,9 @@ export class AppController {
   @Redirect('../openapi', 302)
   getFixOpenApiInterfaceRedirection (): void {}
 
-  @Post('convert/html/to/png')
+  @Post('convert/html/to/image')
   @Version('1')
-  async convertHtmlToPng (@Body() convertHtmlToPngRequestDto: ConvertHtmlToPngRequestDto): Promise<ConvertHtmlToPngResponseDto> {
-    return await this.appService.convertHtmlToPng(convertHtmlToPngRequestDto)
+  async convertHtmlToPng (@Body() convertHtmlToPngRequestDto: ConvertHtmlToImageRequestDto): Promise<ConvertHtmlToImageResponseDto> {
+    return await this.appService.convertHtmlToImage(convertHtmlToPngRequestDto)
   }
 }

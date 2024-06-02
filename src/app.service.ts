@@ -3,7 +3,7 @@ import packageJson from '../package.json'
 import { apiReference } from '@scalar/nestjs-api-reference'
 import { Request, Response } from 'express'
 import { OpenAPIObject } from '@nestjs/swagger'
-import { ConvertHtmlToPngRequestDto, ConvertHtmlToPngResponseDto, GetVersionResponseDto } from './app.dto'
+import { ConvertHtmlToImageRequestDto, ConvertHtmlToImageResponseDto, GetVersionResponseDto } from './app.dto'
 import { config } from './config'
 import nodeHtmlToImage from 'node-html-to-image'
 
@@ -35,15 +35,15 @@ export class AppService {
     api(req, res)
   }
 
-  async convertHtmlToPng (convertHtmlToPngRequestDto: ConvertHtmlToPngRequestDto): Promise<ConvertHtmlToPngResponseDto> {
+  async convertHtmlToImage (convertHtmlToImageRequestDto: ConvertHtmlToImageRequestDto): Promise<ConvertHtmlToImageResponseDto> {
     const image = await nodeHtmlToImage({
-      html: convertHtmlToPngRequestDto.html,
+      html: convertHtmlToImageRequestDto.html,
       puppeteerArgs: {
         args: ['--no-sandbox', '--disable-gpu']
       }
     })
     if (!Buffer.isBuffer(image)) {
-      throw new HttpException('Failed to convert HTML to PNG', 500)
+      throw new HttpException('Failed to convert HTML to IMAGE', 500)
     }
     return {
       data: image.toString('base64')
