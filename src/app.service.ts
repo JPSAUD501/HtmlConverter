@@ -39,7 +39,7 @@ export class AppService {
     const image = await nodeHtmlToImage({
       html: convertHtmlToPngRequestDto.html,
       puppeteerArgs: {
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
+        args: ['--no-sandbox', '--disable-gpu']
       }
     })
     if (!Buffer.isBuffer(image)) {
