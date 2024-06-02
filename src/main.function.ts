@@ -28,6 +28,5 @@ createNestServer(server)
   .catch((err) => { Logger.error('Nest server broken!', err) })
 
 export const api = functions.runWith({
-  memory: '1GB',
-  secrets: []
+  memory: '1GB'
 }).https.onRequest(server)

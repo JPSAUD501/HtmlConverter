@@ -51,7 +51,7 @@ export class AppController {
   @Redirect('../openapi', 302)
   getFixOpenApiInterfaceRedirection (): void {}
 
-  @Post('convert/to/png')
+  @Post('convert/html/to/png')
   @Version('1')
   async convertHtmlToPng (@Body() convertHtmlToPngRequestDto: ConvertHtmlToPngRequestDto): Promise<ConvertHtmlToPngResponseDto> {
     return await this.appService.convertHtmlToPng(convertHtmlToPngRequestDto)
