@@ -1,8 +1,10 @@
 name: Build and Deploy to Firebase
-"on":
+
+on:
   push:
     branches:
       - main
+
 env:
   CI: false
 
@@ -20,14 +22,16 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Decode Google Service Account
-        run: echo $GOOGLE_FIREBASE_SERVICE_ACCOUNT | base64 --decode > ${GITHUB_WORKSPACE}/firebase-service-account.json
-
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
-      - name: Authenticate to Firebase
-        run: firebase auth:login --token "$(cat ${GITHUB_WORKSPACE}/firebase-service-account.json)" --account ${GITHUB_WORKSPACE}/firebase-service-account.json
+      - name: Set up Google Service Account
+        env:
+          DATA: ${{ secrets.GOOGLE_FIREBASE_SERVICE_ACCOUNT }}
+        run: echo $DATA | base64 -d > ${HOME}/google-services.json
+
+      - name: Authenticate with Firebase
+        run: firebase auth:import --service-account ${HOME}/google-services.json
 
       - name: Use Firebase development environment
         run: firebase use dev
