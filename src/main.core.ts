@@ -29,8 +29,8 @@ export async function core (props: {
     app.setGlobalPrefix(props.globalPrefix)
   }
   const partialDocument = new DocumentBuilder()
-    .setTitle('Project Paroli - API')
-    .setDescription('The Project Paroli API description')
+    .setTitle('HtmlConverter - API')
+    .setDescription('The HtmlConverter API description')
     .addBearerAuth()
     .setVersion('1.0')
   if (props.serverBasePath !== undefined) {
